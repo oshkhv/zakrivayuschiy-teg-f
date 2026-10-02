@@ -1,5 +1,6 @@
 .page {
-  width: clamp(320px, 90vw, 1200px);
+  width: fit-content;
+  font-variation-settings: 'wght' 400;
   margin: 100px auto;
   color: var(--font-color);
   font-family: var(--font-main);
@@ -7,7 +8,6 @@
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
-  font-weight: 400;
 }
 
 .header {
@@ -56,7 +56,7 @@
 .article__title {
   padding: 4px 10px;
   font-size: 18px;
-  font-weight: 785;
+  font-variation-settings: 'wght' 400;;
 }
 
 .article__cover {
@@ -84,7 +84,6 @@
   font-weight: 400;
   font-size: 14px;
   text-shadow: 0 0 1px var(--bg-color);
-  mix-blend-mode: hard-light;
 }
 
 @supports (
@@ -98,7 +97,6 @@
     text-shadow: none;
     text-stroke: 1px var(--bg-color);
     -webkit-text-stroke: 1px var(--bg-color);
-    mix-blend-mode: hard-light;
   }
 }
 
@@ -260,12 +258,12 @@
   filter: sepia(0.1);
 }
 
-.footer {
+.saving {
   display: flex;
   justify-content: center;
 }
 
-.footer__button {
+.saving__button {
   gap: 8px;
   min-height: 55px;
   padding: 15px 20px;
@@ -276,7 +274,7 @@ dialog::backdrop {
   background: var(--font-color, #000);
 }
 
-.dialog {
+.dialog[open] {
   width: calc(100vw * (352 / 1440));
   min-width: 341px;
   border: 2px solid var(--font-color);
@@ -317,11 +315,11 @@ dialog::backdrop {
     min-width: 320px;
   }
 
-  .footer__button {
+  .saving__button {
     flex-direction: column;
   }
 
-  .footer__button svg {
+  .saving__button svg {
     width: 28px;
     height: 28px;
   }

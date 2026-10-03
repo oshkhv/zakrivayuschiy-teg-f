@@ -1,5 +1,6 @@
 .page {
   width: fit-content;
+  min-width: 375px;
   font-variation-settings: 'wght' 400;
   margin: 100px auto;
   color: var(--font-color);
@@ -11,7 +12,7 @@
 }
 
 .header {
-  width: clamp(320px, 90vw, 700px);
+  width: clamp(375px, 90vw, 700px);
   height: clamp(327px, 90vw, 368px);
   display: flex;
   flex-direction: column;
@@ -45,7 +46,7 @@
   display: flex;
   flex-direction: column;
   gap: 52px;
-  width: clamp(320px, 90vw, 700px);
+  width: clamp(375px, 90vw, 700px);
 }
 
 .article {
@@ -56,13 +57,15 @@
 .article__title {
   padding: 4px 10px;
   font-size: 18px;
-  font-variation-settings: 'wght' 400;;
+  font-variation-settings: 'wght' 785;
 }
 
 .article__cover {
   position: relative;
   border-top: 2px solid var(--font-color);
   border-bottom: 2px solid var(--font-color);
+  aspect-ratio: 1 / 1;
+  overflow: hidden;  
 }
 
 .article__cover-image {
@@ -71,7 +74,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  aspect-ratio: 1 / 1;
 }
 
 .article__cover-label {
@@ -113,19 +115,21 @@
 .article__button {
   display: flex;
   justify-content: end;
-  gap: 2px;
+  gap: 7px;
 }
 
 .card__icon-button {
   position: relative;
   display: flex;
-  align-items: end;
+  align-items: center;
+  justify-content: center;
   min-height: 38px;
   border: none;
   padding: 0;
   background-color: transparent;
   cursor: pointer;
   z-index: 1;
+  outline-offset: -2px;
 }
 
 .card__icon-button:focus {
@@ -142,10 +146,10 @@
   outline: 2px solid var(--font-color);
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: -1;
+  outline-offset: -2px;
 }
 
-.card__icon-button:focus-within::before {
+.card__icon-button:focus-visible::before {
   opacity: 100;
   z-index: 0;
 }
@@ -154,6 +158,11 @@
   width: 130px;
   min-height: 38px;
   padding: 9px 17px;
+}
+
+.card__icon-button .like-icon {
+  margin: auto;
+  display: block;
 }
 
 .button__container {
@@ -167,8 +176,11 @@
   align-items: center;
   border: 2px solid var(--font-color);
   background: var(--bg-color);
+  color: var(--bg-color);
   transition: box-shadow 0.3s ease;
   cursor: pointer;
+  font-family: var(--font-accent);
+  font-variation-settings: 'wght' 400;
 }
 
 .button:focus-visible {
@@ -196,20 +208,15 @@
   position: relative;
   z-index: 1;
   color: var(--bg-color);
-}
-
-.button:hover .button__text {
-  color: var(--bg-color);
+  mix-blend-mode: difference;
 }
 
 .button svg {
   transition: color 0.5s ease-in-out;
   position: relative;
-  z-index: 1;
-}
-
-.button:hover svg {
+  z-index: 2;
   color: var(--bg-color);
+  mix-blend-mode: difference;
 }
 
 @supports (mix-blend-mode: difference) {
@@ -275,8 +282,7 @@ dialog::backdrop {
 }
 
 .dialog[open] {
-  width: calc(100vw * (352 / 1440));
-  min-width: 341px;
+  max-width: none;             
   border: 2px solid var(--font-color);
   padding: 30px;
   background: var(--bg-color);
@@ -291,13 +297,22 @@ dialog::backdrop {
 
 .dialog__warning {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  flex-direction: raw;
   gap: 20px;
   font-family: var(--font-accent);
   font-size: 14px;
   line-height: 150%;
   text-transform: uppercase;
+  max-width: 260px;      
+  margin: 0 auto; 
+}
+
+.dialog__warning svg {
+  flex-shrink: 0;
+  width: 39px;
+  height: 39px;
 }
 
 .dialog__button {
@@ -309,14 +324,33 @@ dialog::backdrop {
   padding: 9px 17px;
 }
 
-@media (width <= 450px) {
+@media (width <= 375px) {
   .page {
     width: 100%;
-    min-width: 320px;
+    min-width: 375px;
+    margin: 100px 0;  
+    box-sizing: border-box;
+  }
+
+  .header, 
+  .main {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .article {
+    box-sizing: border-box;
+  }
+
+  .card__like-button {
+    width: fit-content;
+    height: fit-content;
   }
 
   .saving__button {
     flex-direction: column;
+    width: fit-content;
+    height: 34px;
   }
 
   .saving__button svg {
